@@ -1,7 +1,7 @@
 {
    "description" : "RTE Analyzer used templates",
    "version" : "1.19.0",
-   "RTEOutputDirectory" : "D:/AutoSAR/AUTOSAR_TOOLs/S32K144_SIP/MICROSAR/CBD1800257_D01_S32K1xx/Applications/S32K144_Start_new_IAR/Appl/GenData/",
+   "RTEOutputDirectory" : "D:/PANDORA/CarCode/AUTOSAR_TOOLs/S32K144_SIP/MICROSAR/CBD1800257_D01_S32K1xx/Applications/S32K144_Start_new_IAR/Appl/GenData/",
    "Templates" : {
       "Components/Rte_BswM.h" : {
          "Rte_InitValue_Request_ESH_PostRunRequest_0_requestedMode" : {
