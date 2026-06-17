@@ -52,6 +52,11 @@
  *  Rte_CallHook_DemSatellite_0_CBReadData_OccurrenceCounter_OccurenceCounter_ReadData_Start
  *  Rte_CallHook_DemSatellite_0_CBReadData_OdometerValue_OdometerValue_ReadData_Return
  *  Rte_CallHook_DemSatellite_0_CBReadData_OdometerValue_OdometerValue_ReadData_Start
+ *  Rte_ComHook_sig_FrontInterLight_omsg_Transmit2_oCAN00_72e0ad73_Tx_SigTx
+ *  Rte_ComHook_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx_SigTx
+ *  Rte_ComHook_sig_RearInteriorLight_omsg_Transmit_oCAN00_49a633c1_Tx_SigTx
+ *  Rte_ComHook_sig_RearLeftWindow_Position_omsg_Receive2_oCAN00_d591b374_Rx_SigRx
+ *  Rte_ComHook_sig_RearRightWindow_Position_omsg_Receive2_oCAN00_125b9849_Rx_SigRx
  *  Rte_ReadHook_BswM_Request_ESH_PostRunRequest_0_requestedMode_Return
  *  Rte_ReadHook_BswM_Request_ESH_PostRunRequest_0_requestedMode_Start
  *  Rte_ReadHook_BswM_Request_ESH_PostRunRequest_1_requestedMode_Return
@@ -60,6 +65,10 @@
  *  Rte_ReadHook_BswM_Request_ESH_RunRequest_0_requestedMode_Start
  *  Rte_ReadHook_BswM_Request_ESH_RunRequest_1_requestedMode_Return
  *  Rte_ReadHook_BswM_Request_ESH_RunRequest_1_requestedMode_Start
+ *  Rte_ReadHook_CtLedTask_RearLedftWindow_Position_u8_Signal_Return
+ *  Rte_ReadHook_CtLedTask_RearLedftWindow_Position_u8_Signal_Start
+ *  Rte_ReadHook_CtLedTask_RearRightWindow_Position_u8_Signal_Return
+ *  Rte_ReadHook_CtLedTask_RearRightWindow_Position_u8_Signal_Start
  *  Rte_Runnable_BswM_BswM_MainFunction_Return
  *  Rte_Runnable_BswM_BswM_MainFunction_Start
  *  Rte_Runnable_CddSbc_Sbc_Test_Runnable_Return
@@ -214,6 +223,12 @@
  *  Rte_Task_Dispatch
  *  Rte_Task_WaitEvent
  *  Rte_Task_WaitEventRet
+ *  Rte_WriteHook_CtLedTask_FrontInterLight_bool_Signal_Return
+ *  Rte_WriteHook_CtLedTask_FrontInterLight_bool_Signal_Start
+ *  Rte_WriteHook_CtLedTask_LampCnt_u8_Singal_Return
+ *  Rte_WriteHook_CtLedTask_LampCnt_u8_Singal_Start
+ *  Rte_WriteHook_CtLedTask_RearInterLight_Bool_Signal_Return
+ *  Rte_WriteHook_CtLedTask_RearInterLight_Bool_Signal_Start
  *  SchM_EnterHook_BswM_BSWM_EXCLUSIVE_AREA_0_Return
  *  SchM_EnterHook_BswM_BSWM_EXCLUSIVE_AREA_0_Start
  *  SchM_EnterHook_CanIf_CANIF_EXCLUSIVE_AREA_0_Return

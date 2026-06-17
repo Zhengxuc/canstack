@@ -71,8 +71,33 @@ Std_ReturnType TSC_CtLedTask_Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(ComM_M
 
 
 
+Std_ReturnType TSC_CtLedTask_Rte_Read_RearLedftWindow_Position_u8_Signal(uint8 *data)
+{
+  return Rte_Read_RearLedftWindow_Position_u8_Signal(data);
+}
+
+Std_ReturnType TSC_CtLedTask_Rte_Read_RearRightWindow_Position_u8_Signal(uint8 *data)
+{
+  return Rte_Read_RearRightWindow_Position_u8_Signal(data);
+}
 
 
+
+
+Std_ReturnType TSC_CtLedTask_Rte_Write_FrontInterLight_bool_Signal(boolean data)
+{
+  return Rte_Write_FrontInterLight_bool_Signal(data);
+}
+
+Std_ReturnType TSC_CtLedTask_Rte_Write_LampCnt_u8_Singal(uint8 data)
+{
+  return Rte_Write_LampCnt_u8_Singal(data);
+}
+
+Std_ReturnType TSC_CtLedTask_Rte_Write_RearInterLight_Bool_Signal(boolean data)
+{
+  return Rte_Write_RearInterLight_Bool_Signal(data);
+}
 
 
 
