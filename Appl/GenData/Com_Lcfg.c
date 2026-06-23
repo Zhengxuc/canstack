@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Com_Lcfg.c
- *   Generation Time: 2026-06-04 14:07:25
+ *   Generation Time: 2026-06-23 20:30:58
  *           Project: S32K144_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -230,6 +230,26 @@ CONST(Com_RxSigInfoType, COM_CONST) Com_RxSigInfo[5] = {  /* PRQA S 1514, 1533 *
 /*lint -restore */
 
 /**********************************************************************************************************************
+  Com_TxFilterInitValueUInt8
+**********************************************************************************************************************/
+/** 
+  \var    Com_TxFilterInitValueUInt8
+  \brief  Contains the initial values used for initialization of the old value to evaluate the filter algorithm. (BOOLEAN, UINT8)
+*/ 
+#define COM_START_SEC_CONST_8BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+CONST(Com_TxFilterInitValueUInt8Type, COM_CONST) Com_TxFilterInitValueUInt8[1] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+  /* Index     TxFilterInitValueUInt8      Referable Keys */
+  /*     0 */                   0x00u   /* [/ActiveEcuC/Com/ComConfig/RearLeft_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
+};
+#define COM_STOP_SEC_CONST_8BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+
+/**********************************************************************************************************************
   Com_TxModeFalse
 **********************************************************************************************************************/
 /** 
@@ -260,21 +280,23 @@ CONST(Com_TxModeFalseType, COM_CONST) Com_TxModeFalse[2] = {  /* PRQA S 1514, 15
   \var    Com_TxModeInfo
   \brief  Contains all relevant information for transmission mode handling.
   \details
-  Element           Description
-  InitMode          Initial transmission mode selector of the Tx I-PDU.
-  TxModeFalseIdx    the index of the 1:1 relation pointing to Com_TxModeFalse
-  TxModeTrueIdx     the index of the 1:1 relation pointing to Com_TxModeTrue
+  Element                                Description
+  InitMode                               Initial transmission mode selector of the Tx I-PDU.
+  TxModeFalseIdx                         the index of the 1:1 relation pointing to Com_TxModeFalse
+  TxModeTrueIdx                          the index of the 1:1 relation pointing to Com_TxModeTrue
+  TxSigInfoFilterInitValueIndEndIdx      the end index of the 0:n relation pointing to Com_TxSigInfoFilterInitValueInd
+  TxSigInfoFilterInitValueIndStartIdx    the start index of the 0:n relation pointing to Com_TxSigInfoFilterInitValueInd
 */ 
 #define COM_START_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
 CONST(Com_TxModeInfoType, COM_CONST) Com_TxModeInfo[4] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
-    /* Index    InitMode  TxModeFalseIdx  TxModeTrueIdx        Referable Keys */
-  { /*     0 */     TRUE,             1u,            0u },  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
-  { /*     1 */     TRUE,             0u,            0u },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx] */
-  { /*     2 */     TRUE,             1u,            0u },  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
-  { /*     3 */     TRUE,             0u,            0u }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+    /* Index    InitMode  TxModeFalseIdx  TxModeTrueIdx  TxSigInfoFilterInitValueIndEndIdx                     TxSigInfoFilterInitValueIndStartIdx                           Referable Keys */
+  { /*     0 */     TRUE,             1u,            1u,                                                   1u,                                                     0u },  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
+  { /*     1 */     TRUE,             0u,            0u, COM_NO_TXSIGINFOFILTERINITVALUEINDENDIDXOFTXMODEINFO, COM_NO_TXSIGINFOFILTERINITVALUEINDSTARTIDXOFTXMODEINFO },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx] */
+  { /*     2 */     TRUE,             1u,            0u, COM_NO_TXSIGINFOFILTERINITVALUEINDENDIDXOFTXMODEINFO, COM_NO_TXSIGINFOFILTERINITVALUEINDSTARTIDXOFTXMODEINFO },  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
+  { /*     3 */     TRUE,             0u,            0u, COM_NO_TXSIGINFOFILTERINITVALUEINDENDIDXOFTXMODEINFO, COM_NO_TXSIGINFOFILTERINITVALUEINDSTARTIDXOFTXMODEINFO }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -288,16 +310,19 @@ CONST(Com_TxModeInfoType, COM_CONST) Com_TxModeInfo[4] = {  /* PRQA S 1514, 1533
   \var    Com_TxModeTrue
   \brief  Contains all relevant information for transmission mode true.
   \details
-  Element     Description
-  Periodic    TRUE if transmission mode contains a cyclic part.
+  Element       Description
+  Periodic      TRUE if transmission mode contains a cyclic part.
+  RepCnt        Repetition count for replication of transmission requests plus one initial transmit.
+  TimePeriod    Cycle time factor.
 */ 
 #define COM_START_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
-CONST(Com_TxModeTrueType, COM_CONST) Com_TxModeTrue[1] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
-    /* Index    Periodic        Referable Keys */
-  { /*     0 */     TRUE }   /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+CONST(Com_TxModeTrueType, COM_CONST) Com_TxModeTrue[2] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+    /* Index    Periodic  RepCnt  TimePeriod        Referable Keys */
+  { /*     0 */     TRUE,     0u,        10u },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  { /*     1 */     TRUE,     4u,       200u }   /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -412,9 +437,12 @@ CONST(Com_TxPduInitValueType, COM_CONST) Com_TxPduInitValue[25] = {  /* PRQA S 1
   \brief  Contains all relevant information for Tx signals and group signals.
   \details
   Element             Description
+  OnChangeUsed        TRUE, if the 0:1 relation has minimum 1 relation pointing to Com_FilterInfo_UInt8,Com_FilterInfo_SInt8,Com_FilterInfo_UInt16,Com_FilterInfo_SInt16,Com_FilterInfo_UInt32,Com_FilterInfo_SInt32,Com_FilterInfo_UInt64,Com_FilterInfo_SInt64,Com_FilterInfo_Float32,Com_FilterInfo_Float64,Com_FilterInfo_UInt8_N
   BitLength           Bit length of the signal or group signal.
   BitPosition         Little endian bit position of the signal or group signal within the I-PDU.
   ByteLength          Byte length of the signal or group signal.
+  BytePosition        Little endian byte position of the signal or group signal within the I-PDU.
+  OnChangeIdx         the index of the 0:1 relation pointing to Com_FilterInfo_UInt8,Com_FilterInfo_SInt8,Com_FilterInfo_UInt16,Com_FilterInfo_SInt16,Com_FilterInfo_UInt32,Com_FilterInfo_SInt32,Com_FilterInfo_UInt64,Com_FilterInfo_SInt64,Com_FilterInfo_Float32,Com_FilterInfo_Float64,Com_FilterInfo_UInt8_N
   TxBufferLength      the number of relations pointing to Com_TxBuffer
   TxBufferStartIdx    the start index of the 0:n relation pointing to Com_TxBuffer
   TxPduInfoIdx        the index of the 1:1 relation pointing to Com_TxPduInfo
@@ -423,12 +451,13 @@ CONST(Com_TxPduInitValueType, COM_CONST) Com_TxPduInitValue[25] = {  /* PRQA S 1
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
-CONST(Com_TxSigInfoType, COM_CONST) Com_TxSigInfo[4] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
-    /* Index    BitLength  BitPosition  ByteLength  TxBufferLength  TxBufferStartIdx  TxPduInfoIdx        Referable Keys */
-  { /*     0 */        1u,          0u,         0u,             1u,               0u,           0u },  /* [/ActiveEcuC/Com/ComConfig/RearLeft_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
-  { /*     1 */        1u,          0u,         0u,             1u,              16u,           2u },  /* [/ActiveEcuC/Com/ComConfig/sig_FrontInterLight_omsg_Transmit2_oCAN00_72e0ad73_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
-  { /*     2 */        8u,          0u,         1u,             1u,               8u,           1u },  /* [/ActiveEcuC/Com/ComConfig/sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx, /ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx] */
-  { /*     3 */        1u,          0u,         0u,             1u,              24u,           3u }   /* [/ActiveEcuC/Com/ComConfig/sig_RearInteriorLight_omsg_Transmit_oCAN00_49a633c1_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+CONST(Com_TxSigInfoType, COM_CONST) Com_TxSigInfo[5] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+    /* Index    OnChangeUsed  BitLength  BitPosition  ByteLength  BytePosition  OnChangeIdx                    TxBufferLength  TxBufferStartIdx  TxPduInfoIdx        Referable Keys */
+  { /*     0 */         TRUE,        1u,          0u,         0u,           0u,                            0u,             1u,               0u,           0u },  /* [/ActiveEcuC/Com/ComConfig/RearLeft_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_NetworkTxFilterInitValue] */
+  { /*     1 */        FALSE,        1u,          1u,         0u,           0u, COM_NO_ONCHANGEIDXOFTXSIGINFO,             1u,               0u,           0u },  /* [/ActiveEcuC/Com/ComConfig/RearRight_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
+  { /*     2 */        FALSE,        1u,          0u,         0u,           0u, COM_NO_ONCHANGEIDXOFTXSIGINFO,             1u,              16u,           2u },  /* [/ActiveEcuC/Com/ComConfig/sig_FrontInterLight_omsg_Transmit2_oCAN00_72e0ad73_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
+  { /*     3 */        FALSE,        8u,          0u,         1u,           0u, COM_NO_ONCHANGEIDXOFTXSIGINFO,             1u,               8u,           1u },  /* [/ActiveEcuC/Com/ComConfig/sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx, /ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx] */
+  { /*     4 */        FALSE,        1u,          0u,         0u,           0u, COM_NO_ONCHANGEIDXOFTXSIGINFO,             1u,              24u,           3u }   /* [/ActiveEcuC/Com/ComConfig/sig_RearInteriorLight_omsg_Transmit_oCAN00_49a633c1_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -767,7 +796,7 @@ VAR(Com_TransmitRequestType, COM_VAR_NOINIT) Com_TransmitRequest[4];  /* PRQA S 
 /*lint -restore */
 VAR(Com_TxBufferType, COM_VAR_NOINIT) Com_TxBuffer[25];  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
   /* Index        Referable Keys */
-  /*     0 */  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/RearLeft_Window] */
+  /*     0 */  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/RearLeft_Window, /ActiveEcuC/Com/ComConfig/RearRight_Window] */
   /*     1 */  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
   /*   ... */  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
   /*     7 */  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
@@ -808,6 +837,26 @@ VAR(Com_TxCyclicProcessingISRLockCounterType, COM_VAR_NOINIT) Com_TxCyclicProces
 /*lint -restore */
 VAR(Com_TxDeadlineMonitoringISRLockCounterType, COM_VAR_NOINIT) Com_TxDeadlineMonitoringISRLockCounter;  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
 #define COM_STOP_SEC_VAR_NOINIT_16BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+
+/**********************************************************************************************************************
+  Com_TxFilterOldValueUInt8
+**********************************************************************************************************************/
+/** 
+  \var    Com_TxFilterOldValueUInt8
+  \brief  This buffer holds the old signal values for filter MASKED_NEW_DIFFERS_MASKED_OLD and for transfer property TRIGGERED_ON_CHANGE_* evaluation. (BOOLEAN, UINT8)
+*/ 
+#define COM_START_SEC_VAR_NOINIT_8BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+VAR(Com_TxFilterOldValueUInt8Type, COM_VAR_NOINIT) Com_TxFilterOldValueUInt8[1];  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+  /* Index        Referable Keys */
+  /*     0 */  /* [/ActiveEcuC/Com/ComConfig/RearLeft_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
+
+#define COM_STOP_SEC_VAR_NOINIT_8BIT
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */

@@ -35,7 +35,7 @@
  * ComM_ModeType
  *   uint8 represents integers with a minimum value of 0 and a maximum value of 255.
  *      The order-relation on uint8 is: x < y if y - x is positive.
- *      uint8 has a lexical representation consisting of a finite-length sequence 
+ *      uint8 has a lexical representation consisting of a finite-length sequence  
  *      of decimal digits (#x30-#x39).
  *      
  *      For example: 1, 0, 126, +10.
@@ -50,6 +50,8 @@
  *********************************************************************************************************************/
 
 #include "Dio.h"
+//引入com头文件
+#include "Com_Cfg.h"
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of include and declaration area >>          DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
@@ -156,6 +158,7 @@ FUNC(void, CtLedTask_CODE) LedRunnable(void) /* PRQA S 0850 */ /* MD_MSR_19.8 */
  * Symbol: LedRunnable
  *********************************************************************************************************************/
 
+  //现在的runnable时300ms周期调用的
 static unsigned char  LedState=0;
 static int  LedCnt=0;
 
@@ -165,31 +168,49 @@ LedCnt++;
 LedState ^= 0x01;
 
 //user code 
-static uint8 RearLeftWindowPosition = 0;
-static uint8 RearRightWindowPosition = 0 ;
-static unsigned char  InterLampState = 0;
+//static uint8 RearLeftWindowPosition = 0;
+//static uint8 RearRightWindowPosition = 0 ;
+//static unsigned char  InterLampState = 0;
 
+//com发送属性练习
+static unsigned char RearLeftWindow = 1;
+static unsigned char RearRightWindow = 1 ;
+static unsigned char ComSendCnt  = 0 ;
+static boolean RearLeftWindow_value  = 0;
+
+
+// if(ComSendCnt == 10 ){
+//    Com_SendSignal(ComConf_ComSignal_RearLeft_Window, (&RearLeftWindow));
+//    ComSendCnt  = 0;
+// }else{
+//   ComSendCnt ++ ;
+// }
 
  Dio_WriteChannel(112,LedState);
  //user code
- Rte_Write_CtLedTask_LampCnt_u8_Singal(LedCnt);
- Rte_Write_CtLedTask_RearInterLight_Bool_Signal(1);
- 
- Rte_Read_RearLedftWindow_Position_u8_Signal(&RearLeftWindowPosition);
- Rte_Read_RearRightWindow_Position_u8_Signal(&RearRightWindowPosition);
- 
- if(0x65 == RearLeftWindowPosition ){
-   Rte_Write_LampCnt_u8_Singal(RearLeftWindowPosition);
-   InterLampState =1;
- }else if (0x37 == RearRightWindowPosition){
-   Rte_Write_LampCnt_u8_Singal(RearRightWindowPosition);
-   InterLampState = 1;
- }else{
-   InterLampState = 0;
-   
- }
- Rte_Write_FrontInterLight_bool_Signal(InterLampState);
+// Rte_Write_CtLedTask_LampCnt_u8_Singal(LedCnt);
+// Rte_Write_CtLedTask_RearInterLight_Bool_Signal(1);
+// 
+// Rte_Read_RearLedftWindow_Position_u8_Signal(&RearLeftWindowPosition);
+// Rte_Read_RearRightWindow_Position_u8_Signal(&RearRightWindowPosition);
+// 
+// if(0x65 == RearLeftWindowPosition ){
+//   Rte_Write_LampCnt_u8_Singal(RearLeftWindowPosition);
+//   InterLampState =1;
+// }else if (0x37 == RearRightWindowPosition){
+//   Rte_Write_LampCnt_u8_Singal(RearRightWindowPosition);
+//   InterLampState = 1;
+// }else{
+//   InterLampState = 0;
+//   
+// }
+// Rte_Write_FrontInterLight_bool_Signal(InterLampState);
 
+ //com属性练习
+    RearLeftWindow_value ++; 
+    Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &RearLeftWindow_value);//300ms触发一次++ 信号值改变 触发发送
+    Com_SendSignal(ComConf_ComSignal_RearRight_Window, (&RearRightWindow));//这里是每2s发一次 不受 runnable的影响
+ 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
