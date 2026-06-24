@@ -52,6 +52,7 @@
 #include "Dio.h"
 //引入com头文件
 #include "Com_Cfg.h"
+#include "Appl_Cbk.h"
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of include and declaration area >>          DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
@@ -211,14 +212,29 @@ static boolean RearLeftWindow_value  = 0;
     // Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &RearLeftWindow_value);//300ms触发一次++ 信号值改变 触发发送
     // Com_SendSignal(ComConf_ComSignal_RearRight_Window, (&RearRightWindow));//这里是每2s发一次 不受 runnable的影响
   //signal_group练习
-    Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal, &RearLeftWindow);//
-    Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal_1, (&RearRightWindow));//
-    Com_SendSignalGroup(ComConf_ComSignalGroup_MyECUSignalGroup);//比send signal多一步  ,这里
+    // Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal, &RearLeftWindow);//
+    // Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal_1, (&RearRightWindow));//
+    // Com_SendSignalGroup(ComConf_ComSignalGroup_MyECUSignalGroup);//比send signal多一步  ,这里
     
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 }
+static unsigned char CbxCnt = 1;
+//signal接收到后会调用的函数
+FUNC(void, COM_APPL_CODE) ComCbxRx_RearLeftWindowPosition(void){
+
+  CbxCnt = 0;
+  
+}
+
+//signal超时后会调用的函数
+FUNC(void, COM_APPL_CODE) ComCbxToutRx_RearLeftWindowPosition(void){
+
+Com_SendSignal(ComConf_ComSignal_RearRight_Window, (&CbxCnt));//
+
+}
+
 
 
 #define CtLedTask_STOP_SEC_CODE
