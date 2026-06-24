@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Com_Lcfg.c
- *   Generation Time: 2026-06-23 20:30:58
+ *   Generation Time: 2026-06-23 22:02:45
  *           Project: S32K144_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -362,23 +362,24 @@ CONST(Com_TxPduGrpInfoType, COM_CONST) Com_TxPduGrpInfo[4] = {  /* PRQA S 1514, 
   \var    Com_TxPduInfo
   \brief  Contains all relevant information for Tx I-PDUs.
   \details
-  Element                   Description
-  TxPduInitValueUsed        TRUE, if the 0:n relation has 1 relation pointing to Com_TxPduInitValue
-  MetaDataLength            Length of MetaData.
-  TxBufferLength            the number of relations pointing to Com_TxBuffer
-  TxPduInitValueEndIdx      the end index of the 0:n relation pointing to Com_TxPduInitValue
-  TxPduInitValueStartIdx    the start index of the 0:n relation pointing to Com_TxPduInitValue
+  Element                    Description
+  TxPduInitValueUsed         TRUE, if the 0:n relation has 1 relation pointing to Com_TxPduInitValue
+  TxBufferLength             the number of relations pointing to Com_TxBuffer
+  TxPduInitValueEndIdx       the end index of the 0:n relation pointing to Com_TxPduInitValue
+  TxPduInitValueStartIdx     the start index of the 0:n relation pointing to Com_TxPduInitValue
+  TxSigGrpInfoIndEndIdx      the end index of the 0:n relation pointing to Com_TxSigGrpInfoInd
+  TxSigGrpInfoIndStartIdx    the start index of the 0:n relation pointing to Com_TxSigGrpInfoInd
 */ 
 #define COM_START_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
 CONST(Com_TxPduInfoType, COM_CONST) Com_TxPduInfo[4] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
-    /* Index    TxPduInitValueUsed  MetaDataLength  TxBufferLength  TxPduInitValueEndIdx  TxPduInitValueStartIdx        Referable Keys */
-  { /*     0 */               TRUE,             0u,             8u,                   8u,                     0u },  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
-  { /*     1 */               TRUE,             0u,             8u,                  16u,                     8u },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
-  { /*     2 */               TRUE,             0u,             8u,                  24u,                    16u },  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
-  { /*     3 */               TRUE,             0u,             1u,                  25u,                    24u }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
+    /* Index    TxPduInitValueUsed  TxBufferLength  TxPduInitValueEndIdx  TxPduInitValueStartIdx  TxSigGrpInfoIndEndIdx                    TxSigGrpInfoIndStartIdx                          Referable Keys */
+  { /*     0 */               TRUE,             8u,                   8u,                     0u, COM_NO_TXSIGGRPINFOINDENDIDXOFTXPDUINFO, COM_NO_TXSIGGRPINFOINDSTARTIDXOFTXPDUINFO },  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
+  { /*     1 */               TRUE,             8u,                  16u,                     8u, COM_NO_TXSIGGRPINFOINDENDIDXOFTXPDUINFO, COM_NO_TXSIGGRPINFOINDSTARTIDXOFTXPDUINFO },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
+  { /*     2 */               TRUE,             8u,                  24u,                    16u, COM_NO_TXSIGGRPINFOINDENDIDXOFTXPDUINFO, COM_NO_TXSIGGRPINFOINDSTARTIDXOFTXPDUINFO },  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
+  { /*     3 */               TRUE,             8u,                  32u,                    24u,                                      1u,                                        0u }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -396,7 +397,7 @@ CONST(Com_TxPduInfoType, COM_CONST) Com_TxPduInfo[4] = {  /* PRQA S 1514, 1533 *
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
-CONST(Com_TxPduInitValueType, COM_CONST) Com_TxPduInitValue[25] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+CONST(Com_TxPduInitValueType, COM_CONST) Com_TxPduInitValue[32] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
   /* Index     TxPduInitValue      Referable Keys */
   /*     0 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
   /*     1 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
@@ -422,7 +423,60 @@ CONST(Com_TxPduInitValueType, COM_CONST) Com_TxPduInitValue[25] = {  /* PRQA S 1
   /*    21 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
   /*    22 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
   /*    23 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
-  /*    24 */           0x00u   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    24 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    25 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    26 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    27 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    28 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    29 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    30 */           0x00u,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    31 */           0x00u   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+};
+#define COM_STOP_SEC_CONST_8BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+
+/**********************************************************************************************************************
+  Com_TxSigGrpInfo
+**********************************************************************************************************************/
+/** 
+  \var    Com_TxSigGrpInfo
+  \brief  Contains all relevant information for Tx Signal Groups.
+  \details
+  Element             Description
+  TxSigGrpMaskUsed    TRUE, if the 0:n relation has 1 relation pointing to Com_TxSigGrpMask
+*/ 
+#define COM_START_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+CONST(Com_TxSigGrpInfoType, COM_CONST) Com_TxSigGrpInfo[1] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+    /* Index    TxSigGrpMaskUsed        Referable Keys */
+  { /*     0 */             TRUE }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECUSignalGroup/MyECUGroupSignal, /ActiveEcuC/Com/ComConfig/MyECUSignalGroup/MyECUGroupSignal_1] */
+};
+#define COM_STOP_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+
+/**********************************************************************************************************************
+  Com_TxSigGrpMask
+**********************************************************************************************************************/
+/** 
+  \var    Com_TxSigGrpMask
+  \brief  Signal group mask needed to copy interlaced signal groups to the Tx PDU buffer.
+*/ 
+#define COM_START_SEC_CONST_8BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+CONST(Com_TxSigGrpMaskType, COM_CONST) Com_TxSigGrpMask[4] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+  /* Index     TxSigGrpMask      Referable Keys */
+  /*     0 */         0xFFu,  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup] */
+  /*     1 */         0xFFu,  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup] */
+  /*     2 */         0xFFu,  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup] */
+  /*     3 */         0xFFu   /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup] */
 };
 #define COM_STOP_SEC_CONST_8BIT
 /*lint -save -esym(961, 19.1) */
@@ -436,28 +490,33 @@ CONST(Com_TxPduInitValueType, COM_CONST) Com_TxPduInitValue[25] = {  /* PRQA S 1
   \var    Com_TxSigInfo
   \brief  Contains all relevant information for Tx signals and group signals.
   \details
-  Element             Description
-  OnChangeUsed        TRUE, if the 0:1 relation has minimum 1 relation pointing to Com_FilterInfo_UInt8,Com_FilterInfo_SInt8,Com_FilterInfo_UInt16,Com_FilterInfo_SInt16,Com_FilterInfo_UInt32,Com_FilterInfo_SInt32,Com_FilterInfo_UInt64,Com_FilterInfo_SInt64,Com_FilterInfo_Float32,Com_FilterInfo_Float64,Com_FilterInfo_UInt8_N
-  BitLength           Bit length of the signal or group signal.
-  BitPosition         Little endian bit position of the signal or group signal within the I-PDU.
-  ByteLength          Byte length of the signal or group signal.
-  BytePosition        Little endian byte position of the signal or group signal within the I-PDU.
-  OnChangeIdx         the index of the 0:1 relation pointing to Com_FilterInfo_UInt8,Com_FilterInfo_SInt8,Com_FilterInfo_UInt16,Com_FilterInfo_SInt16,Com_FilterInfo_UInt32,Com_FilterInfo_SInt32,Com_FilterInfo_UInt64,Com_FilterInfo_SInt64,Com_FilterInfo_Float32,Com_FilterInfo_Float64,Com_FilterInfo_UInt8_N
-  TxBufferLength      the number of relations pointing to Com_TxBuffer
-  TxBufferStartIdx    the start index of the 0:n relation pointing to Com_TxBuffer
-  TxPduInfoIdx        the index of the 1:1 relation pointing to Com_TxPduInfo
+  Element                   Description
+  OnChangeUsed              TRUE, if the 0:1 relation has minimum 1 relation pointing to Com_FilterInfo_UInt8,Com_FilterInfo_SInt8,Com_FilterInfo_UInt16,Com_FilterInfo_SInt16,Com_FilterInfo_UInt32,Com_FilterInfo_SInt32,Com_FilterInfo_UInt64,Com_FilterInfo_SInt64,Com_FilterInfo_Float32,Com_FilterInfo_Float64,Com_FilterInfo_UInt8_N
+  ApplType                  Application data type.
+  BitLength                 Bit length of the signal or group signal.
+  BitPosition               Little endian bit position of the signal or group signal within the I-PDU.
+  ByteLength                Byte length of the signal or group signal.
+  FilterInitValueIdx        the index of the 0:1 relation pointing to Com_TxFilterInitValueUInt8,Com_TxFilterInitValueUInt16,Com_TxFilterInitValueUInt32,Com_TxFilterInitValueUInt64,Com_TxFilterInitValueSInt8,Com_TxFilterInitValueSInt16,Com_TxFilterInitValueSInt32,Com_TxFilterInitValueSInt64,Com_TxFilterInitValueFloat32,Com_TxFilterInitValueFloat64
+  OnChangeIdx               the index of the 0:1 relation pointing to Com_FilterInfo_UInt8,Com_FilterInfo_SInt8,Com_FilterInfo_UInt16,Com_FilterInfo_SInt16,Com_FilterInfo_UInt32,Com_FilterInfo_SInt32,Com_FilterInfo_UInt64,Com_FilterInfo_SInt64,Com_FilterInfo_Float32,Com_FilterInfo_Float64,Com_FilterInfo_UInt8_N
+  StartByteInPduPosition    Start Byte position of the signal or group signal within the I-PDU.
+  TxBufferEndIdx            the end index of the 0:n relation pointing to Com_TxBuffer
+  TxBufferStartIdx          the start index of the 0:n relation pointing to Com_TxBuffer
+  TxPduInfoIdx              the index of the 1:1 relation pointing to Com_TxPduInfo
+  TxSigGrpInfoIdx           the index of the 0:1 relation pointing to Com_TxSigGrpInfo
 */ 
 #define COM_START_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
-CONST(Com_TxSigInfoType, COM_CONST) Com_TxSigInfo[5] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
-    /* Index    OnChangeUsed  BitLength  BitPosition  ByteLength  BytePosition  OnChangeIdx                    TxBufferLength  TxBufferStartIdx  TxPduInfoIdx        Referable Keys */
-  { /*     0 */         TRUE,        1u,          0u,         0u,           0u,                            0u,             1u,               0u,           0u },  /* [/ActiveEcuC/Com/ComConfig/RearLeft_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_NetworkTxFilterInitValue] */
-  { /*     1 */        FALSE,        1u,          1u,         0u,           0u, COM_NO_ONCHANGEIDXOFTXSIGINFO,             1u,               0u,           0u },  /* [/ActiveEcuC/Com/ComConfig/RearRight_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
-  { /*     2 */        FALSE,        1u,          0u,         0u,           0u, COM_NO_ONCHANGEIDXOFTXSIGINFO,             1u,              16u,           2u },  /* [/ActiveEcuC/Com/ComConfig/sig_FrontInterLight_omsg_Transmit2_oCAN00_72e0ad73_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
-  { /*     3 */        FALSE,        8u,          0u,         1u,           0u, COM_NO_ONCHANGEIDXOFTXSIGINFO,             1u,               8u,           1u },  /* [/ActiveEcuC/Com/ComConfig/sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx, /ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx] */
-  { /*     4 */        FALSE,        1u,          0u,         0u,           0u, COM_NO_ONCHANGEIDXOFTXSIGINFO,             1u,              24u,           3u }   /* [/ActiveEcuC/Com/ComConfig/sig_RearInteriorLight_omsg_Transmit_oCAN00_49a633c1_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+CONST(Com_TxSigInfoType, COM_CONST) Com_TxSigInfo[7] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+    /* Index    OnChangeUsed  ApplType                        BitLength  BitPosition  ByteLength  FilterInitValueIdx                    OnChangeIdx                    StartByteInPduPosition  TxBufferEndIdx  TxBufferStartIdx  TxPduInfoIdx  TxSigGrpInfoIdx                          Referable Keys */
+  { /*     0 */        FALSE, COM_UINT16_APPLTYPEOFTXSIGINFO,       16u,          8u,         2u, COM_NO_FILTERINITVALUEIDXOFTXSIGINFO, COM_NO_ONCHANGEIDXOFTXSIGINFO,                     1u,            34u,              32u,           3u,                                0u },  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup/MyECUGroupSignal, /ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  { /*     1 */        FALSE, COM_UINT16_APPLTYPEOFTXSIGINFO,       16u,         24u,         2u, COM_NO_FILTERINITVALUEIDXOFTXSIGINFO, COM_NO_ONCHANGEIDXOFTXSIGINFO,                     3u,            36u,              34u,           3u,                                0u },  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup/MyECUGroupSignal_1, /ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  { /*     2 */         TRUE,  COM_UINT8_APPLTYPEOFTXSIGINFO,        1u,          0u,         0u,                                   0u,                            0u,                     0u,             1u,               0u,           0u, COM_NO_TXSIGGRPINFOIDXOFTXSIGINFO },  /* [/ActiveEcuC/Com/ComConfig/RearLeft_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_NetworkTxFilterInitValue] */
+  { /*     3 */        FALSE,  COM_UINT8_APPLTYPEOFTXSIGINFO,        1u,          1u,         0u, COM_NO_FILTERINITVALUEIDXOFTXSIGINFO, COM_NO_ONCHANGEIDXOFTXSIGINFO,                     0u,             1u,               0u,           0u, COM_NO_TXSIGGRPINFOIDXOFTXSIGINFO },  /* [/ActiveEcuC/Com/ComConfig/RearRight_Window, /ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
+  { /*     4 */        FALSE,  COM_UINT8_APPLTYPEOFTXSIGINFO,        1u,          0u,         0u, COM_NO_FILTERINITVALUEIDXOFTXSIGINFO, COM_NO_ONCHANGEIDXOFTXSIGINFO,                     0u,            17u,              16u,           2u, COM_NO_TXSIGGRPINFOIDXOFTXSIGINFO },  /* [/ActiveEcuC/Com/ComConfig/sig_FrontInterLight_omsg_Transmit2_oCAN00_72e0ad73_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
+  { /*     5 */        FALSE,  COM_UINT8_APPLTYPEOFTXSIGINFO,        8u,          0u,         1u, COM_NO_FILTERINITVALUEIDXOFTXSIGINFO, COM_NO_ONCHANGEIDXOFTXSIGINFO,                     0u,             9u,               8u,           1u, COM_NO_TXSIGGRPINFOIDXOFTXSIGINFO },  /* [/ActiveEcuC/Com/ComConfig/sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx, /ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx] */
+  { /*     6 */        FALSE,  COM_UINT8_APPLTYPEOFTXSIGINFO,        1u,          0u,         0u, COM_NO_FILTERINITVALUEIDXOFTXSIGINFO, COM_NO_ONCHANGEIDXOFTXSIGINFO,                     0u,            25u,              24u,           3u, COM_NO_TXSIGGRPINFOIDXOFTXSIGINFO }   /* [/ActiveEcuC/Com/ComConfig/sig_RearInteriorLight_omsg_Transmit_oCAN00_49a633c1_Tx, /ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -761,6 +820,23 @@ VAR(Com_RxSigBufferUInt8Type, COM_VAR_NOINIT) Com_RxSigBufferUInt8[5];  /* PRQA 
 /*lint -restore */
 
 /**********************************************************************************************************************
+  Com_SigGrpEventFlag
+**********************************************************************************************************************/
+/** 
+  \var    Com_SigGrpEventFlag
+  \brief  Flag is set if a group signal write access caused a triggered event.
+*/ 
+#define COM_START_SEC_VAR_NOINIT_8BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+VAR(Com_SigGrpEventFlagType, COM_VAR_NOINIT) Com_SigGrpEventFlag[1];  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+#define COM_STOP_SEC_VAR_NOINIT_8BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+
+/**********************************************************************************************************************
   Com_TransmitRequest
 **********************************************************************************************************************/
 /** 
@@ -794,7 +870,7 @@ VAR(Com_TransmitRequestType, COM_VAR_NOINIT) Com_TransmitRequest[4];  /* PRQA S 
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
-VAR(Com_TxBufferType, COM_VAR_NOINIT) Com_TxBuffer[25];  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+VAR(Com_TxBufferType, COM_VAR_NOINIT) Com_TxBuffer[36];  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
   /* Index        Referable Keys */
   /*     0 */  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network, /ActiveEcuC/Com/ComConfig/RearLeft_Window, /ActiveEcuC/Com/ComConfig/RearRight_Window] */
   /*     1 */  /* [/ActiveEcuC/Com/ComConfig/MyECU2_Com_CAN_Network] */
@@ -809,6 +885,16 @@ VAR(Com_TxBufferType, COM_VAR_NOINIT) Com_TxBuffer[25];  /* PRQA S 1514, 1533 */
   /*   ... */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
   /*    23 */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit2_oCAN00_97205322_Tx] */
   /*    24 */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/sig_RearInteriorLight_omsg_Transmit_oCAN00_49a633c1_Tx] */
+  /*    25 */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECUSignalGroupSigGrpInTxIPDU] */
+  /*   ... */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECUSignalGroupSigGrpInTxIPDU] */
+  /*    28 */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECUSignalGroupSigGrpInTxIPDU] */
+  /*    29 */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*   ... */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    31 */  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*    32 */  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup, /ActiveEcuC/Com/ComConfig/MyECUSignalGroup/MyECUGroupSignal] */
+  /*    33 */  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup, /ActiveEcuC/Com/ComConfig/MyECUSignalGroup/MyECUGroupSignal] */
+  /*    34 */  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup, /ActiveEcuC/Com/ComConfig/MyECUSignalGroup/MyECUGroupSignal_1] */
+  /*    35 */  /* [/ActiveEcuC/Com/ComConfig/MyECUSignalGroup, /ActiveEcuC/Com/ComConfig/MyECUSignalGroup/MyECUGroupSignal_1] */
 
 #define COM_STOP_SEC_VAR_NOINIT_8BIT
 /*lint -save -esym(961, 19.1) */

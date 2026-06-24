@@ -173,8 +173,8 @@ LedState ^= 0x01;
 //static unsigned char  InterLampState = 0;
 
 //com发送属性练习
-static unsigned char RearLeftWindow = 1;
-static unsigned char RearRightWindow = 1 ;
+static unsigned char RearLeftWindow = 99;
+static unsigned char RearRightWindow = 255 ;
 static unsigned char ComSendCnt  = 0 ;
 static boolean RearLeftWindow_value  = 0;
 
@@ -207,10 +207,14 @@ static boolean RearLeftWindow_value  = 0;
 // Rte_Write_FrontInterLight_bool_Signal(InterLampState);
 
  //com属性练习
-    RearLeftWindow_value ++; 
-    Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &RearLeftWindow_value);//300ms触发一次++ 信号值改变 触发发送
-    Com_SendSignal(ComConf_ComSignal_RearRight_Window, (&RearRightWindow));//这里是每2s发一次 不受 runnable的影响
- 
+    // RearLeftWindow_value ++; 
+    // Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &RearLeftWindow_value);//300ms触发一次++ 信号值改变 触发发送
+    // Com_SendSignal(ComConf_ComSignal_RearRight_Window, (&RearRightWindow));//这里是每2s发一次 不受 runnable的影响
+  //signal_group练习
+    Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal, &RearLeftWindow);//
+    Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal_1, (&RearRightWindow));//
+    Com_SendSignalGroup(ComConf_ComSignalGroup_MyECUSignalGroup);//比send signal多一步  ,这里
+    
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
