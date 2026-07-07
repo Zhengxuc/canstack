@@ -945,7 +945,7 @@
                 <expressions>
                     <item>RearLeftWindowPosition</item>
                     <item>RearRightWindowPosition</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

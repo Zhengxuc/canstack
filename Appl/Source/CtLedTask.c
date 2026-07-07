@@ -2,9 +2,9 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *          File:  CtLedTask.c
- *        Config:  C:/Vector/CBD1800257_D01_S32K1xx/Applications/S32K144_Start_new/S32K144_Start.dpa
+ *        Config:  D:/PANDORA/CarCode/AUTOSAR_TOOLs/S32K144_SIP/MICROSAR/CBD1800257_D01_S32K1xx/Applications/S32K144_Start_new_IAR/S32K144_Start.dpa
  *     SW-C Type:  CtLedTask
- *  Generated at:  Mon Jun  7 11:19:43 2021
+ *  Generated at:  Mon Jul  6 19:00:48 2026
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -35,7 +35,7 @@
  * ComM_ModeType
  *   uint8 represents integers with a minimum value of 0 and a maximum value of 255.
  *      The order-relation on uint8 is: x < y if y - x is positive.
- *      uint8 has a lexical representation consisting of a finite-length sequence  
+ *      uint8 has a lexical representation consisting of a finite-length sequence 
  *      of decimal digits (#x30-#x39).
  *      
  *      For example: 1, 0, 126, +10.
@@ -66,6 +66,7 @@
  *
  * Primitive Types:
  * ================
+ * boolean: Boolean (standard type)
  * uint8: Integer in interval [0...255] (standard type)
  *
  * Enumeration Types:
@@ -139,7 +140,24 @@ Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(COMM_FULL_COMMUNICATION);
  *---------------------------------------------------------------------------------------------------------------------
  *
  * Executed if at least one of the following trigger conditions occurred:
- *   - triggered on TimingEvent every 500ms
+ *   - triggered on TimingEvent every 300ms
+ *
+ **********************************************************************************************************************
+ *
+ * Input Interfaces:
+ * =================
+ *   Explicit S/R API:
+ *   -----------------
+ *   Std_ReturnType Rte_Read_RearLedftWindow_Position_u8_Signal(uint8 *data)
+ *   Std_ReturnType Rte_Read_RearRightWindow_Position_u8_Signal(uint8 *data)
+ *
+ * Output Interfaces:
+ * ==================
+ *   Explicit S/R API:
+ *   -----------------
+ *   Std_ReturnType Rte_Write_FrontInterLight_bool_Signal(boolean data)
+ *   Std_ReturnType Rte_Write_LampCnt_u8_Singal(uint8 data)
+ *   Std_ReturnType Rte_Write_RearInterLight_Bool_Signal(boolean data)
  *
  *********************************************************************************************************************/
 /**********************************************************************************************************************
@@ -187,7 +205,7 @@ static boolean RearLeftWindow_value  = 0;
 //   ComSendCnt ++ ;
 // }
 
- Dio_WriteChannel(112,LedState);
+ Dio_WriteChannel(112,LedState);//写电平
  //user code
 // Rte_Write_CtLedTask_LampCnt_u8_Singal(LedCnt);
 // Rte_Write_CtLedTask_RearInterLight_Bool_Signal(1);
@@ -220,20 +238,20 @@ static boolean RearLeftWindow_value  = 0;
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 }
-static unsigned char CbxCnt = 1;
-//signal接收到后会调用的函数
-FUNC(void, COM_APPL_CODE) ComCbxRx_RearLeftWindowPosition(void){
+static uint8 u8CbkData = 0;
+FUNC (void ,COM_APPL_CODE) ComCbxToutRx_RearLeftWindowPosition (void) {
+  u8CbkData = 1;
+  Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
+}
 
-  CbxCnt = 0;
+FUNC (void ,COM_APPL_CODE)  ComCbxRx_RearLeftWindowPosition (void){
   
+  u8CbkData = 0 ;
+  Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
 }
 
-//signal超时后会调用的函数
-FUNC(void, COM_APPL_CODE) ComCbxToutRx_RearLeftWindowPosition(void){
 
-Com_SendSignal(ComConf_ComSignal_RearRight_Window, (&CbxCnt));//
 
-}
 
 
 
