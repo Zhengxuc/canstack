@@ -13223,7 +13223,7 @@ LOCAL_INLINE FUNC(uint8, COM_CODE) Com_SendSignal_Processing(Com_SignalIdType id
 {
   uint8 retVal = E_OK;          /* PRQA S 2981 */ /* MD_MSR_RetVal */
 
-  Com_TxPduInfoIdxOfTxSigInfoType idxTxPduInfo = Com_GetTxPduInfoIdxOfTxSigInfo(idxTxSigInfo);
+  Com_TxPduInfoIdxOfTxSigInfoType idxTxPduInfo = Com_GetTxPduInfoIdxOfTxSigInfo(idxTxSigInfo);/*找到属于哪个pdu*/
 
 # if ((COM_FILTERINFOUSEDOFTXSIGINFO == STD_ON) || (COM_ONCHANGEUSEDOFTXSIGINFO == STD_ON) || (COM_TRIGGEREDOFTXSIGINFO == STD_ON))
   P2CONST(void, AUTOMATIC, AUTOMATIC) newValuePtr = (P2CONST(void, AUTOMATIC, AUTOMATIC)) SignalDataPtr;
@@ -13248,7 +13248,7 @@ LOCAL_INLINE FUNC(uint8, COM_CODE) Com_SendSignal_Processing(Com_SignalIdType id
     Com_SendSignal_CheckFilter(idxTxSigInfo, newValuePtr, (PduIdType) idxTxPduInfo);    /* SBSW_COM_FCTCALL_WITH_P2CONST */
 # endif
     /* #40 Write the passed signal data */
-    Com_SendSignal_WriteSignal(idxTxSigInfo, SignalDataPtr, Length, (PduIdType) idxTxPduInfo);  /* SBSW_COM_FCTCALL_WITH_P2CONST */
+    Com_SendSignal_WriteSignal(idxTxSigInfo, SignalDataPtr, Length, (PduIdType) idxTxPduInfo);  /* SBSW_COM_FCTCALL_WITH_P2CONST */ /*真正的发送函数*/
 
     /* #50 If the Tx ComIPdu is active, evaluate the trigger conditions, otherwise return COM_SERVICE_NOT_AVAILABLE */
     if(Com_IsTxPduGrpActive(idxTxPduInfo))
