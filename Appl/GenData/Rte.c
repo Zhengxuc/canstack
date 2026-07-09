@@ -40,6 +40,7 @@
 #include "Rte_Det.h"
 #include "Rte_EcuM.h"
 #include "Rte_Os_OsCore0_swc.h"
+#include "SchM_Adc.h"
 #include "SchM_BswM.h"
 #include "SchM_Can.h"
 #include "SchM_CanIf.h"

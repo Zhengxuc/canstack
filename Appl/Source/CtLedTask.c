@@ -51,8 +51,7 @@
 
 #include "Dio.h"
 //引入com头文件
-#include "Com_Cfg.h"
-#include "Appl_Cbk.h"
+
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of include and declaration area >>          DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
@@ -81,7 +80,8 @@
 
 #define CtLedTask_START_SEC_CODE
 #include "CtLedTask_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
-
+#include "Com_Cfg.h"
+#include "Appl_Cbk.h"
 /**********************************************************************************************************************
  *
  * Runnable Entity Name: CtLedTask_InitRunnable
@@ -233,6 +233,16 @@ static boolean RearLeftWindow_value  = 0;
     // Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal, &RearLeftWindow);//
     // Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal_1, (&RearRightWindow));//
     // Com_SendSignalGroup(ComConf_ComSignalGroup_MyECUSignalGroup);//比send signal多一步  ,这里
+ 
+ //adc练习
+   static uint16 Adc_Data = 0;
+   static uint16 retValue = 0;
+   Adc_StartGroupConversion(0);
+   retValue = Adc_ReadGroup(0,&Adc_Data);
+   Adc_Data = Adc_Data/20; //这里要除一下是因为要能放在pdu里面 因为adc_data是16位的 send signal只能装下8位 (好像是 待确认)
+   Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
+  
+
     
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
@@ -251,6 +261,16 @@ FUNC (void ,COM_APPL_CODE)  ComCbxRx_RearLeftWindowPosition (void){
 }
 
 
+void AdcGroup0Notification(void)
+{
+//     static uint16 Adc_Data = 0;
+//     static uint16 retValue = 0;
+//     retValue = Adc_ReadGroup(0,&Adc_Data);
+//     Adc_Data = Adc_Data/20;
+// 
+//     Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
+
+}
 
 
 
