@@ -131,6 +131,12 @@
             <Setting Value="ASC" Name="nattable.sortDirections"/>
             <Setting Value="1" Name="nattable.sortIndexes"/>
         </Settings>
+        <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.Os.OsIsr">
+            <Setting Value="0,1,2,3,4,5,6,7,8,9,10,11,12," Name="nattable.BODY.columnIndexOrder"/>
+            <Setting Value="0:21,1:166,2:108,3:143,4:163,5:151,6:150,7:138,8:223,9:187,10:150,11:108,12:132," Name="nattable.BODY.columnWidth.sizes"/>
+            <Setting Value="ASC" Name="nattable.sortDirections"/>
+            <Setting Value="1" Name="nattable.sortIndexes"/>
+        </Settings>
         <Settings Name="com.vector.cfg.gui.gce.internal.GCETable.MICROSAR.Os.OsTask">
             <Setting Value="0,1,2,3,4,5,6,7,8,9,10,11,12," Name="nattable.BODY.columnIndexOrder"/>
             <Setting Value="0:20,1:142,2:123,3:235,4:108,5:119,6:146,7:162,8:95,9:120,10:193,11:770,12:144," Name="nattable.BODY.columnWidth.sizes"/>

@@ -127,6 +127,9 @@ FUNC(void, CtLedTask_CODE) CtLedTask_InitRunnable(void) /* PRQA S 0850 */ /* MD_
  * Symbol: CtLedTask_InitRunnable
  *********************************************************************************************************************/
 
+  static uint16 u16ResultBuffer[1] = {0u};
+  Adc_SetupResultBuffer(0,u16ResultBuffer);//设置buffer
+  Adc_EnableGroupNotification(0);//使能
 Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(COMM_FULL_COMMUNICATION);
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
@@ -183,7 +186,6 @@ static int  LedCnt=0;
 
 
 LedCnt++;
-
 LedState ^= 0x01;
 
 //user code 
@@ -205,7 +207,7 @@ static boolean RearLeftWindow_value  = 0;
 //   ComSendCnt ++ ;
 // }
 
- Dio_WriteChannel(112,LedState);//写电平
+ Dio_WriteChannel(112,LedState);//写电平 led闪烁
  //user code
 // Rte_Write_CtLedTask_LampCnt_u8_Singal(LedCnt);
 // Rte_Write_CtLedTask_RearInterLight_Bool_Signal(1);
@@ -235,19 +237,21 @@ static boolean RearLeftWindow_value  = 0;
     // Com_SendSignalGroup(ComConf_ComSignalGroup_MyECUSignalGroup);//比send signal多一步  ,这里
  
  //adc练习
-   static uint16 Adc_Data = 0;
-   static uint16 retValue = 0;
-   Adc_StartGroupConversion(0);
-   retValue = Adc_ReadGroup(0,&Adc_Data);
-   Adc_Data = Adc_Data/20; //这里要除一下是因为要能放在pdu里面 因为adc_data是16位的 send signal只能装下8位 (好像是 待确认)
-   Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
+//   static uint16 Adc_Data = 0;
+//   static uint16 retValue = 0;
+//   Adc_StartGroupConversion(0);
+//   retValue = Adc_ReadGroup(0,&Adc_Data);
+//   Adc_Data = Adc_Data/20; //这里要除一下是因为要能放在pdu里面 因为adc_data是16位的 send signal只能装下8位 (好像是 待确认)
+//   Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
   
-
+   //adc带中断的练习
+  Adc_StartGroupConversion(0);
     
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 }
+//超时练习
 static uint8 u8CbkData = 0;
 FUNC (void ,COM_APPL_CODE) ComCbxToutRx_RearLeftWindowPosition (void) {
   u8CbkData = 1;
@@ -263,12 +267,12 @@ FUNC (void ,COM_APPL_CODE)  ComCbxRx_RearLeftWindowPosition (void){
 
 void AdcGroup0Notification(void)
 {
-//     static uint16 Adc_Data = 0;
-//     static uint16 retValue = 0;
-//     retValue = Adc_ReadGroup(0,&Adc_Data);
-//     Adc_Data = Adc_Data/20;
-// 
-//     Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
+     static uint16 Adc_Data = 0;
+     static uint16 retValue = 0;
+     retValue = Adc_ReadGroup(0,&Adc_Data);
+     Adc_Data = Adc_Data/20;
+ 
+     Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
 
 }
 
