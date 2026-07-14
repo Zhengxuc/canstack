@@ -220,7 +220,7 @@ static CONST(Pwm_Ftm_ChannelConfigType, PWM_CONST) Pwm_Ftm_ChannelConfig_PB[PWM_
         PWM_LOW,
 
         /** @brief Pwm channel idle state */
-        PWM_LOW,
+        PWM_HIGH,
 
         /** @brief Default duty cycle value */
         ((uint16)16384),

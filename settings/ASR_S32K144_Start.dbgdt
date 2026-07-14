@@ -946,7 +946,7 @@
                     <item>RearLeftWindowPosition</item>
                     <item>RearRightWindowPosition</item>
                     <item>Adc_Data</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

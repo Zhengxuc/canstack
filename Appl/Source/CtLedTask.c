@@ -82,6 +82,7 @@
 #include "CtLedTask_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
 #include "Com_Cfg.h"
 #include "Appl_Cbk.h"
+#include "Pwm.h"
 /**********************************************************************************************************************
  *
  * Runnable Entity Name: CtLedTask_InitRunnable
@@ -130,7 +131,7 @@ FUNC(void, CtLedTask_CODE) CtLedTask_InitRunnable(void) /* PRQA S 0850 */ /* MD_
   static uint16 u16ResultBuffer[1] = {0u};
   Adc_SetupResultBuffer(0,u16ResultBuffer);//设置buffer
   Adc_EnableGroupNotification(0);//使能
-Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(COMM_FULL_COMMUNICATION);
+  Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(COMM_FULL_COMMUNICATION);
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
@@ -231,12 +232,12 @@ static boolean RearLeftWindow_value  = 0;
     // RearLeftWindow_value ++; 
     // Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &RearLeftWindow_value);//300ms触发一次++ 信号值改变 触发发送
     // Com_SendSignal(ComConf_ComSignal_RearRight_Window, (&RearRightWindow));//这里是每2s发一次 不受 runnable的影响
-  //signal_group练习
+  //signal_group练习 多个信号打包一起发送
     // Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal, &RearLeftWindow);//
     // Com_SendSignal(ComConf_ComGroupSignal_MyECUGroupSignal_1, (&RearRightWindow));//
     // Com_SendSignalGroup(ComConf_ComSignalGroup_MyECUSignalGroup);//比send signal多一步  ,这里
  
- //adc练习
+ //MCAL:adc练习
 //   static uint16 Adc_Data = 0;
 //   static uint16 retValue = 0;
 //   Adc_StartGroupConversion(0);
@@ -244,39 +245,59 @@ static boolean RearLeftWindow_value  = 0;
 //   Adc_Data = Adc_Data/20; //这里要除一下是因为要能放在pdu里面 因为adc_data是16位的 send signal只能装下8位 (好像是 待确认)
 //   Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
   
-   //adc带中断的练习
-  Adc_StartGroupConversion(0);
+   //MCal:adc带中断的练习
+  Adc_StartGroupConversion(0);//开启这句话下面的adc回调函数才能起作用
+  
+  //Mcal ：PWM
+ 
     
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 }
-//超时练习
+//CanStack 超时回调练习
 static uint8 u8CbkData = 0;
 FUNC (void ,COM_APPL_CODE) ComCbxToutRx_RearLeftWindowPosition (void) {
   u8CbkData = 1;
   Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
 }
 
+//CanStack: 回调函数
 FUNC (void ,COM_APPL_CODE)  ComCbxRx_RearLeftWindowPosition (void){
   
   u8CbkData = 0 ;
   Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
 }
 
+////MCAL:ADC 回调函数
+//void AdcGroup0Notification(void)
+//{
+//     static uint16 Adc_Data = 0;
+//     static uint16 retValue = 0;
+//     retValue = Adc_ReadGroup(0,&Adc_Data);
+//     Adc_Data = Adc_Data/20;
+// 
+//     Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
+//
+//}
 
+//MCAL:ADC 回调函数 与pwm练习
+static Pwm_OutputStateType ePwmOutStsRet = 0u;
 void AdcGroup0Notification(void)
 {
      static uint16 Adc_Data = 0;
      static uint16 retValue = 0;
-     retValue = Adc_ReadGroup(0,&Adc_Data);
-     Adc_Data = Adc_Data/20;
- 
-     Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&Adc_Data));
-
+     uint16 u16AdcToPwmData =0u;
+     uint16 u16AdcCH2_Data = 0u;
+     retValue = Adc_ReadGroup(0,&u16AdcCH2_Data);
+     u16AdcToPwmData = u16AdcCH2_Data*8;
+       
+     Pwm_SetDutyCycle(0,u16AdcToPwmData);//设置占空比
+     ePwmOutStsRet = Pwm_GetOutputState(0);//返回状态
+     Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&u16AdcToPwmData));
+     
+     
 }
-
-
 
 
 #define CtLedTask_STOP_SEC_CODE

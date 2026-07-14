@@ -2399,6 +2399,9 @@
                     <name>$PROJ_DIR$\Appl\GenData\src\Port_PBcfg.c</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\Appl\GenData\src\Pwm_PBcfg.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\Appl\GenData\src\Spi_Cfg.c</name>
                 </file>
                 <file>
@@ -3097,6 +3100,18 @@
             </file>
         </group>
         <group>
+            <name>PWM</name>
+            <file>
+                <name>$PROJ_DIR$\MCAL\Pwm_TS_T40D2M10I1R0\src\Pwm.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\MCAL\Pwm_TS_T40D2M10I1R0\src\Pwm_Ftm.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\MCAL\Pwm_TS_T40D2M10I1R0\src\Pwm_Ipw.c</name>
+            </file>
+        </group>
+        <group>
             <name>SPI</name>
             <file>
                 <name>$PROJ_DIR$\MCAL\Spi_TS_T40D2M10I1R0\src\Spi.c</name>
@@ -3108,5 +3123,8 @@
                 <name>$PROJ_DIR$\MCAL\Spi_TS_T40D2M10I1R0\src\Spi_LPspi_Irq.c</name>
             </file>
         </group>
+        <file>
+            <name>$PROJ_DIR$\MCAL\Mcl_TS_T40D2M10I1R0\src\Ftm_Common.c</name>
+        </file>
     </group>
 </project>
