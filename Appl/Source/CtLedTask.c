@@ -128,9 +128,15 @@ FUNC(void, CtLedTask_CODE) CtLedTask_InitRunnable(void) /* PRQA S 0850 */ /* MD_
  * Symbol: CtLedTask_InitRunnable
  *********************************************************************************************************************/
 
+  //adc相关初始化
   static uint16 u16ResultBuffer[1] = {0u};
-  Adc_SetupResultBuffer(0,u16ResultBuffer);//设置buffer
-  Adc_EnableGroupNotification(0);//使能
+  Adc_SetupResultBuffer(0,u16ResultBuffer);//adc设置buffer
+  Adc_EnableGroupNotification(0);//adc使能
+  
+  //Gpt相关初始化
+  Gpt_EnableNotification(0);
+  Gpt_StartTimer(0,240000);//因为时钟频率是24000000 (24mhz) 这里是值不是时钟频率 而是决定了定时周期 写240000就是10ms进入一次定时器中断 ，
+                                                                                    //在本次例程学习里 cnt++>=100 即 1s反转一次电平
   Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(COMM_FULL_COMMUNICATION);
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
@@ -182,12 +188,11 @@ FUNC(void, CtLedTask_CODE) LedRunnable(void) /* PRQA S 0850 */ /* MD_MSR_19.8 */
  *********************************************************************************************************************/
 
   //现在的runnable时300ms周期调用的
-static unsigned char  LedState=0;
-static int  LedCnt=0;
-
-
-LedCnt++;
-LedState ^= 0x01;
+//static unsigned char  LedState=0;
+//static int  LedCnt=0;
+//LedCnt++;
+//LedState ^= 0x01;
+// Dio_WriteChannel(112,LedState);//写电平 led闪烁
 
 //user code 
 //static uint8 RearLeftWindowPosition = 0;
@@ -208,7 +213,7 @@ static boolean RearLeftWindow_value  = 0;
 //   ComSendCnt ++ ;
 // }
 
- Dio_WriteChannel(112,LedState);//写电平 led闪烁
+
  //user code
 // Rte_Write_CtLedTask_LampCnt_u8_Singal(LedCnt);
 // Rte_Write_CtLedTask_RearInterLight_Bool_Signal(1);
@@ -256,18 +261,18 @@ static boolean RearLeftWindow_value  = 0;
  *********************************************************************************************************************/
 }
 //CanStack 超时回调练习
-static uint8 u8CbkData = 0;
-FUNC (void ,COM_APPL_CODE) ComCbxToutRx_RearLeftWindowPosition (void) {
-  u8CbkData = 1;
-  Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
-}
-
-//CanStack: 回调函数
-FUNC (void ,COM_APPL_CODE)  ComCbxRx_RearLeftWindowPosition (void){
-  
-  u8CbkData = 0 ;
-  Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
-}
+//static uint8 u8CbkData = 0;
+//FUNC (void ,COM_APPL_CODE) ComCbxToutRx_RearLeftWindowPosition (void) {
+//  u8CbkData = 1;
+//  Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
+//}
+//
+////CanStack: 回调函数
+//FUNC (void ,COM_APPL_CODE)  ComCbxRx_RearLeftWindowPosition (void){
+//  
+//  u8CbkData = 0 ;
+//  Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
+//}
 
 ////MCAL:ADC 回调函数
 //void AdcGroup0Notification(void)
@@ -295,14 +300,36 @@ void AdcGroup0Notification(void)
      Pwm_SetDutyCycle(0,u16AdcToPwmData);//设置占空比
      ePwmOutStsRet = Pwm_GetOutputState(0);//返回状态
      Com_SendSignal(ComConf_ComSignal_sig_LampCnt_omsg_MyECU_Lamp_oCAN00_f37e68ea_Tx,(&u16AdcToPwmData));
-     
-     
 }
 
+//GPT练习
+static uint8 u8CbkData = 0;
+FUNC (void ,COM_APPL_CODE) ComCbxToutRx_RearLeftWindowPosition (void) {
+  
+  Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
+}
 
+//回调函数
+FUNC (void ,COM_APPL_CODE)  ComCbxRx_RearLeftWindowPosition (void){
+  u8CbkData = 1;
+  Com_SendSignal(ComConf_ComSignal_RearLeft_Window, &u8CbkData);
+}
 #define CtLedTask_STOP_SEC_CODE
 #include "CtLedTask_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
-
+void Gpt_10ms(void){
+  static unsigned char LedState = 0;
+  static int LedCnt = 0;
+  u8CbkData++;
+  if(u8CbkData >=100){
+   LedCnt ++;
+   LedState ^= 0x01 ;
+   Dio_WriteChannel(112,LedState);//写电平 led闪烁
+   u8CbkData = 0;
+  }
+  
+  
+  
+}
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << Start of function definition area >>            DO NOT CHANGE THIS COMMENT!
