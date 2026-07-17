@@ -1,0 +1,52 @@
+2024-06-28 - 16:07:49
+Workflow 'Update workflow.' started.
+              Using DaVinci Configurator  5.18.37 SP1 (x86_64).
+ 16:07:49 - Action 'Validate workflow environment' started.
+ 16:07:49 - Action 'Validate dpa file' started.
+ 16:07:50 - Action 'Validate dpa file' successfully finished.
+ 16:07:50 - Action 'SLP conformance check' started.
+ 16:07:50 - Action 'SLP conformance check' successfully finished.
+ 16:07:50 - Action 'Validate workflow environment' successfully finished.
+ 16:07:50 - Action 'Create copy of the Project' started.
+              Copy project 'G:\matlab\S32K144_SIP\MICROSAR\CBD1800257_D01_S32K1xx\Applications\S32K144_Start_new_IAR' to 'C:\Users\Wangjianwen\AppData\Local\Temp\DaVinci\Cfg-1980290\Workflow\1719562070479-0'...
+              Adjusting DPA file of copied project...
+ 16:07:50 - Action 'Create copy of the Project' successfully finished.
+ 16:07:50 - Action 'Close Project' started.
+ 16:07:50 - Action 'Close Project' successfully finished.
+ 16:07:55 - Action 'Prepare System Extract' started.
+ 16:07:55 - Action 'Preprocessing System Extract' started.
+ 16:07:55 - Action 'Preprocessing System Extract' successfully finished.
+ 16:07:55 - Action 'Create OEM Communication Extract' started.
+ 16:07:55 - Action 'Create OEM Communication Extract' successfully finished.
+ 16:07:55 - Action 'Prepare System Extract' successfully finished.
+ 16:07:55 - Action 'Updating the project' started.
+ 16:07:59 - Action 'Create ECU configuration' started.
+              [Warning] COM52013: No transmission mode declared for the ISignalIPdu.
+                          Extract Path: /PDU/msg_MyTransmit_oCAN00
+                          Ecuc    Path: /Com/ComConfig/msg_MyTransmit_oCAN00_7a8a0a44_Tx/ComTxIPdu.
+ 16:08:03 - Action 'Create ECU configuration' successfully finished with warnings.
+                 [Warning] COM52013: No transmission mode declared for the ISignalIPdu.
+                     Extract Path: /PDU/msg_MyTransmit_oCAN00
+                     Ecuc    Path: /Com/ComConfig/msg_MyTransmit_oCAN00_7a8a0a44_Tx/ComTxIPdu.
+ 16:08:03 - Action 'Update ECU configuration' started.
+ 16:08:03 - Action 'Update ECU configuration' started.
+ 16:08:07 - Action 'Update ECU configuration' successfully finished.
+ 16:08:07 - Action 'Update ECU configuration' successfully finished.
+ 16:08:07 - Action 'Updating the project' finished.
+ 16:08:07 - Action 'Adapt project file' started.
+ 16:08:07 - Action 'Adapt project file' successfully finished.
+ 16:08:07 - Action 'Generate update report' started.
+ 16:08:13 - Action 'Generate update report' successfully finished.
+ 16:08:13 - Action 'Execute Solving Actions' started.
+              Executing Auto-Solving-Actions...
+              Auto-Solving-Actions done.
+              Executing update specific Preferred-Solving-Actions...
+              Update specific Preferred-Solving-Actions done.
+ 16:08:16 - Action 'Execute Solving Actions' successfully finished.
+ 16:08:16 - Action 'Update RTE configuration' started.
+ 16:08:16 - Action 'Update RTE configuration' successfully finished.
+ 16:08:17 - Action 'Align differences after successful update' started.
+ 16:08:17 - Action 'Align differences after successful update' successfully finished.
+ 16:08:17 - Action 'Clean up update data' started.
+ 16:08:17 - Action 'Clean up update data' successfully finished.
+16:08:18 - Workflow 'Update workflow.' finished.
